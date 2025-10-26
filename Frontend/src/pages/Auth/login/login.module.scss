@@ -1,0 +1,82 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .form-group {
+        text-align: left;
+        width: 100%;
+        position: relative;
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color:rgb(0, 116, 184);
+            margin: 0px 0 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid rgb(179, 179, 179);
+            background-color:  rgba(163, 213, 255, 0.3)		;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 17px;
+
+            &:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px rgba(169, 209, 230, 0.4);
+            }
+        }
+
+        .checkbox{
+            position: absolute;
+            bottom: 15px;
+            right: 13px;
+            cursor: pointer;
+        }
+
+        span{
+            color: red;
+            font-size: 14px;
+            padding-left: 5px;
+        }
+    }
+
+    .btn {
+      background: #3b82f6;
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #2563eb;
+      }
+    }
+}
+
+  .switch {
+    margin-top: 1rem;
+    font-size: 14px;
+
+    button {
+      background: none;
+      border: none;
+      color: #3b82f6;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+

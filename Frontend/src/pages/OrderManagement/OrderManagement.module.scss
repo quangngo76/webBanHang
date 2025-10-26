@@ -1,0 +1,160 @@
+.container {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f4f6f8;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    h1 {
+        color: #2c3e50;
+    }
+
+    .backBtn {
+        padding: 8px 14px;
+        border: none;
+        background-color: #34495e;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+        background-color: #2c3e50;
+        }
+    }
+}
+
+/* TABLE */
+.tableSection {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+        }
+
+        th {
+        background: #16a085;
+        color: white;
+        }
+
+        tr:nth-child(even) {
+        background: #f9f9f9;
+        }
+
+        tr:hover {
+        background: #ecf0f1;
+        }
+    }
+
+    .status {
+        font-weight: bold;
+        border-radius: 5px;
+        padding: 4px 6px;
+    }
+
+    .processing {
+        color: #f39c12; 
+    }
+
+    .shipping {
+        color: #3498db; 
+    }
+
+    .delivered {
+        color: #2ecc71; 
+    }
+
+    .cancelled {
+        color: #e74c3c; 
+    }
+
+    .detailBtn,
+    .deleteBtn {
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 0 3px;
+        font-size: 14px;
+    }
+
+    .detailBtn {
+        background: #1abc9c;
+        color: white;
+
+        &:hover {
+        background: #16a085;
+        }
+    }
+
+    .deleteBtn {
+        background: #e74c3c;
+        color: white;
+
+        &:hover {
+        background: #c0392b;
+        }
+    }
+
+    .selectStatus {
+        padding: 4px 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+}
+
+/* DETAIL BOX */
+.detailBox {
+    background: white;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+    h3 {
+        color: #16a085;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        margin-top: 10px;
+        padding-left: 18px;
+
+        li {
+        margin-bottom: 6px;
+        }
+    }
+
+    .closeBtn {
+        margin-top: 15px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #34495e;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+        background: #2c3e50;
+        }
+    }
+}

@@ -1,0 +1,131 @@
+.AuthLayout{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  
+}
+.auth-wrapper {
+  width: 100%;
+  height: 809px;
+  background-color: #fff;
+  position: relative;
+}
+
+.circle{
+  background: linear-gradient(315deg, #333333, #888888, #DDDDDD);
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-1{
+  width: 1000px;
+  height: 1000px;
+  top: -283px;
+  left: -118px;
+}
+
+.circle-2{
+  width: 300px;
+  height: 300px;
+  top: 487px;
+  left: 33px;
+}
+
+.circle-3{
+  width: 250px;
+  height: 250px;
+  top: 275px;
+  left: 767px;
+}
+
+.circle-4{
+  width: 50px;
+  height: 50px;
+  top: 89px;
+  left: 973px;
+}
+
+.circle-5{
+  width: 80px;
+  height: 80px;
+  top: 680px;
+  left: 892px;
+}
+
+.circle-6{
+  width: 200px;
+  height: 200px;
+  bottom: 0;
+  right: 0;
+}
+
+.auth-container{
+  width: 90%;
+  height: 100%;
+  margin: auto;
+
+  h1{
+    margin: 0;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
+  hr{
+    border: 2px solid black;
+  }
+
+  .auth-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 75px;
+
+    .auth-message{
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      z-index: 10;
+
+      h3{
+        font-size: 30px;
+        font-weight: bolder;
+        margin: 20px 0;
+      }
+
+      p{
+        font-size: 20px;
+        margin: 5px 0;
+      }
+    }
+
+
+    .auth-box {
+      width: 100%;
+      max-width: 350px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      .avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 10px auto;
+        display: block;
+      }
+
+    }
+
+  }
+
+  
+}
+
+
+
+

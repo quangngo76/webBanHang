@@ -1,0 +1,107 @@
+.ProductManagement{
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    .header-page{
+        font-size: 27px;
+        font-weight: bold;
+    }
+
+    hr{
+        border: 2px solid black;
+    }
+
+    button{
+        padding: 15px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: white;
+        }
+    }
+}
+
+.ProductManagement-page{
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: auto;
+    margin-top: 30px;
+    padding:20px;
+    border-radius: 10px;
+    height: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+    h3{
+        font-size: 23px;
+    }
+    
+    table, th, td{
+        border-collapse: collapse;
+        border: 1px solid rgb(211, 206, 206);
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .container-table{
+        width: 100%;
+        overflow-y: auto;
+    }
+    table{
+        width: 100%;
+        th{
+            padding: 12px 0;
+            font-size: 20px;
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        td{
+            padding: 12px 15px;
+            background-color: white;
+        }
+
+        img{
+            width: 100px;
+            height: 70px;
+        }
+
+        .icon{
+            padding: 0 5px;
+            font-size: 25px;
+            cursor: pointer;
+            margin: 0 2px;
+
+            &:hover{
+                color: red;
+            }
+        }
+    }
+}
+
+.Modal{
+
+    h2{
+        text-align: center;
+        font-size: 25px;
+    }
+
+    div{
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px;
+
+        label{
+            padding-bottom: 5px;
+        }
+    }
+
+    button{
+        padding: 5px 10px;
+        margin: 10px 0;
+        cursor: pointer;
+        transform: translateX(125%);
+    }
+}
