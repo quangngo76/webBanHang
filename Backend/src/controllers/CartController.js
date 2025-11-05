@@ -1,7 +1,8 @@
 const Cart = require('../models/Carts');
 
 class CartController {
-  
+    
+    //Thêm sản phẩm theo userId và productId
     async addProduct(req, res) {
         try {
         const { userId, productId} = req.body;
@@ -38,19 +39,31 @@ class CartController {
         }
     }
 
+    //Lấy tát cả sản phẩm theo ID của User
     async getProduct(req, res) {
-        const { userId } = req.query;  
+        try {
+            const { userId } = req.query;
 
-        const productOfCart = await Cart.find({ user: userId }).populate('product');
+            if (!userId) {
+                return res.status(400).json({ err: true, message: 'Thiếu userId trong query!' });
+            }
 
-        if (!productOfCart || productOfCart.length === 0) {
-            return res.status(404).json({ message: 'Danh sách giỏ hàng rỗng!' });
+            const productOfCart = await Cart.find({ user: userId }).populate('product');
+
+            if (!productOfCart || productOfCart.length === 0) {
+                return res.status(200).json({ products: [] });
+            }
+
+            res.status(200).json({ products: productOfCart });
+
+        } catch (err) {
+            console.error('Lỗi khi lấy giỏ hàng:', err);
+            res.status(500).json({ err: true, message: 'Lỗi server khi lấy giỏ hàng.' });
         }
-
-        console.log(productOfCart)
-        res.status(200).json({ products: productOfCart });
     }
 
+
+    //Xóa sản phẩm theo productId và userId
     async deleteProduct(req, res){
         try {
             const {productId, userId} = req.body

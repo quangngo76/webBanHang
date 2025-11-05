@@ -27,7 +27,10 @@ function ProductCategory() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId: user._id, productId }),
         });
+
         console.log('✅ Added to cart', productId);
+
+        window.dispatchEvent(new Event("cartUpdated"));
       } catch (err) {
         console.error('❌ Fetch error:', err);
       }

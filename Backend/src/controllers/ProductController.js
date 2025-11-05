@@ -2,6 +2,7 @@ const Product = require('../models/Products')
 
 class ProductController{
     
+    //Thêm sản phẩm mới
     async addProduct(req, res) {
         try {
             const { productName, price, quantity } = req.body;
@@ -26,6 +27,7 @@ class ProductController{
         }
     }
 
+    //Lấy sản Phẩm theo ID hoặc lấy tất cả
     async getProduct(req, res) {
         try {
             const { productId } = req.params; 
@@ -45,6 +47,7 @@ class ProductController{
         }
     }
 
+    //Lấy 8 sản phẩm mới nhất
     async getNewProduct(req, res) {
         try {
             const products = await Product.find().sort({_id: -1}).limit(8) ;
@@ -55,6 +58,7 @@ class ProductController{
         }
     }
 
+    //Xóa sản phẩm theo ProductID
     async delProduct(req, res) {
         try {
             const {productId} = req.body
@@ -71,6 +75,7 @@ class ProductController{
         }
     }
 
+    // Update sản phẩm
     async editProduct(req, res) {
         try{
             const { productName, price, quantity, productId } = req.body;
@@ -102,30 +107,31 @@ class ProductController{
         }
     }
 
+    //Tìm kiếm sản phẩm theo searchValue
     async searchProduct(req, res) {
-    try {
-        const { searchValue , pageNumber, limit } = req.body;
-        let skip = (pageNumber - 1) * limit
+        try {
+            const { searchValue , pageNumber, limit } = req.body;
+            let skip = (pageNumber - 1) * limit
 
-        const totalProducts = await Product.find().countDocuments();
+            const totalProducts = await Product.find().countDocuments();
 
-        const totalPages = Math.ceil(totalProducts / limit);
+            const totalPages = Math.ceil(totalProducts / limit);
 
-        let products = [];
+            let products = [];
 
-        if (searchValue === 'all') {
-            products = await Product.find().skip(skip).limit(limit);
-        }else if(searchValue === 'lowest'){
-            products = await Product.find().sort({price: 1}).skip(skip).limit(limit)
-        }else if(searchValue === 'highest'){
-            products = await Product.find().sort({price: -1}).skip(skip).limit(limit)
+            if (searchValue === 'all') {
+                products = await Product.find().skip(skip).limit(limit);
+            }else if(searchValue === 'lowest'){
+                products = await Product.find().sort({price: 1}).skip(skip).limit(limit)
+            }else if(searchValue === 'highest'){
+                products = await Product.find().sort({price: -1}).skip(skip).limit(limit)
+            }
+
+            return res.status(200).json({ products, pageNumber, totalPages });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Lỗi khi tìm kiếm sản phẩm' });
         }
-
-        return res.status(200).json({ products, pageNumber, totalPages });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Lỗi khi tìm kiếm sản phẩm' });
-    }
     }
 
 

@@ -18,13 +18,39 @@ function Header() {
     const [searchValue, setSearchValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isClickUser, setIsClickUser] = useState(false);
+    const [productNumber, setProductNumber] = useState(0);
     const inputRef = useRef();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // Lấy trạng thái login và user từ Redux
     const { isLogin, user } = useSelector(state => state.auth);
+
+    const fetchCartCount = async () => {
+        if (!isLogin || !user?._id) return setProductNumber(0);
+        try {
+            const res = await fetch(`http://localhost:8000/cart?userId=${user._id}`);
+            const data = await res.json();
+            setProductNumber(data?.products?.length || 0);
+        } catch (error) {
+            console.error("Lỗi fetch cart:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCartCount();
+    }, [isLogin, user]);
+
+    useEffect(() => {
+        const handleCartUpdate = () => fetchCartCount();
+        window.addEventListener("cartUpdated", handleCartUpdate);
+        return () => window.removeEventListener("cartUpdated", handleCartUpdate);
+    }, []);
+
+    useEffect(() => {
+        fetchCartCount();
+    }, [isLogin, user]);
+
 
     // Fake loading khi search
     useEffect(() => {
@@ -96,6 +122,9 @@ function Header() {
                     <Link to={'/cart'}>
                         <button className={cx('cart')}>
                             <FontAwesomeIcon icon={faCartPlus} />
+                            {productNumber > 0 && (
+                                <span className={cx('badge')}>{productNumber}</span>
+                            )}
                         </button>
                     </Link>
 
