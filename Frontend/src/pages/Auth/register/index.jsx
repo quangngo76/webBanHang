@@ -84,6 +84,7 @@ function Register() {
       }
 
       setValues({ name: "", email: "", password: "" });
+      alert('Đăng ký thành công')
     } catch (err) {
       console.error("❌ Fetch error:", err);
       setNotice({ show: true, message: "Lỗi kết nối server!", isError: true });

@@ -28,14 +28,14 @@ function ProductCategory() {
           body: JSON.stringify({ userId: user._id, productId }),
         });
 
-        console.log('✅ Added to cart', productId);
+        alert('✅ Đã thêm sản phẩm vào giỏ hàng');
 
         window.dispatchEvent(new Event("cartUpdated"));
       } catch (err) {
         console.error('❌ Fetch error:', err);
       }
     } else {
-      console.log('⚠️ User chưa đăng nhập!');
+      alert('⚠️ User chưa đăng nhập!');
     }
   };
 

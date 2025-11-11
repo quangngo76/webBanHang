@@ -151,16 +151,21 @@ function Cart(){
 
             const data = await res.json();
 
-            setProducts(data.products)
-            setCustomer({
-                fullName: '',
-                phoneNumber: '',
-                email: '',
-                address: '',
-                payment: checkRadio,
-                orders: {}
-            })
-            console.log('Server response:', data);
+            if(data.err){
+                alert(data.message)
+            }else{
+                setProducts(data.products)
+                setCustomer({
+                    fullName: '',
+                    phoneNumber: '',
+                    email: '',
+                    address: '',
+                    payment: checkRadio,
+                    orders: {}
+                })
+                alert('Đặt Hàng thành công');
+            }
+
 
         } catch (err) {
             console.error('Fetch error:', err);

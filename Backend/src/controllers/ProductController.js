@@ -79,6 +79,11 @@ class ProductController{
     async editProduct(req, res) {
         try{
             const { productName, price, quantity, productId } = req.body;
+            let status = "Còn Hàng"
+
+            if(quantity <= 0){
+                 status = "Hết hàng"
+            }
 
             const oldProduct = await Product.findById(productId);
 
@@ -86,7 +91,7 @@ class ProductController{
 
             const updatedProduct = await Product.findByIdAndUpdate(
                 productId,
-                { $set: { name: productName, price, stock: quantity, imageUrl } },
+                { $set: { name: productName, price, stock: quantity, imageUrl, status: status } },
                 { new: true } 
                 );
 

@@ -8,13 +8,15 @@ const cx = classNames.bind(styles);
 export default function Dashboard() {
   const [revenueData, setRevenueData] = useState([])
 
-  const orderStatusData = [
-    { name: "Hoàn thành", value: 65 },
-    { name: "Đang giao", value: 25 },
-    { name: "Bị huỷ", value: 30 },
-  ];
+  const [orderStatusData, setOrderStatusData] = useState([
+    { name: "Đã nhận", value: 0 },
+    { name: "Đang xử lý", value: 0 },
+    { name: "Đang giao", value: 0 },
+    { name: "Đã hủy", value: 0 },
+  ]);
 
-  const COLORS = ["#4CAF50", "#FFC107", "#F44336"];
+
+  const COLORS = ["#4CAF50", "#FFC107", "#0b07ecff", "#F44336"];
 
   const [numberOfUsers, setNumberOfUsers] = useState(0)
   const [numberOfProducts, setNumberOfProducts] = useState(0)
@@ -22,8 +24,6 @@ export default function Dashboard() {
   const [totalRevenue, setTotalRevenue] = useState(0)
 
   const getdata = async () => {
-    
-
     const res = await fetch('http://localhost:8000/data/getData',{
       method: 'GET',
       headers: {'Content-Type' : 'application/json'},
@@ -31,11 +31,31 @@ export default function Dashboard() {
 
     const data = await res.json()
 
-    const total = data.totalPrice.reduce((sum, price) => sum + (price.totalPrice || 0), 0);
+    const total = Array.isArray(data.orders)
+      ? data.orders.reduce((sum, o) => sum + (o.totalPrice || 0), 0)
+      : 0;
+
+    const newStatusData = [
+      { name: "Đã nhận", value: 0 },
+      { name: "Đang xử lý", value: 0 },
+      { name: "Đang giao", value: 0 },
+      { name: "Đã hủy", value: 0 },
+    ];
+
+    data.orders.forEach(order => {
+      if(order.status === "Đã nhận") newStatusData[0].value++;
+      if(order.status === "Đang xử lý") newStatusData[1].value++;
+      if(order.status === "Đang giao") newStatusData[2].value++;
+      if(order.status === "Đã hủy") newStatusData[3].value++;
+    });
+
+setOrderStatusData(newStatusData);
+
 
     setNumberOfUsers(data.users)
     setNumberOfProducts(data.products)
-    setNumberOfOrders(data.orders)
+    console.log(data.orders)
+    setNumberOfOrders(data.orders.length)
     setTotalRevenue(total)
     setRevenueData(data.revenueData)
 

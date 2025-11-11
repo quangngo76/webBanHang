@@ -60,7 +60,7 @@ function OrderPage() {
 
       getOrders();
 
-    } catch (error) {
+    }catch(error) {
       console.error('Error:', error);
       alert('Không thể kết nối đến server');
     }

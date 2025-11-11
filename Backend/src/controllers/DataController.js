@@ -5,10 +5,23 @@ const Product = require('../models/Products')
 class DataController {
 
     async getData(req, res) {
+        //5 Tháng trước
         const fiveMonthsAgo = new Date();
         fiveMonthsAgo.setMonth(fiveMonthsAgo.getMonth() - 5);
         fiveMonthsAgo.setDate(1); 
 
+        //Lấy tất cả đơn hàng tháng 11
+        const now = new Date();
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        const orders = await Order.find({
+            createdAt: {
+                $gte: startOfMonth,
+                $lt: startOfNextMonth
+            }
+        });
+
+        //doanh thu 5 tháng trước
         const revenueData = await Order.aggregate([
         {
             $match: {
@@ -24,13 +37,13 @@ class DataController {
         { $sort: { "_id": 1 } }             
         ]);
 
+        //số lượng user
         const users = await User.countDocuments({ role: 'User' });
-        const orders = await Order.countDocuments();
+        
+        //số lượng sản phẩm
         const products = await Product.countDocuments();
 
-        const totalPrice = await Order.find().select('totalPrice')
-
-        res.status(200).json({users, orders, products , totalPrice, revenueData})
+        res.status(200).json({users, orders, products, revenueData})
     }
 
 }
