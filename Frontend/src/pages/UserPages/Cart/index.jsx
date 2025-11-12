@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import {useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
 
-import {Link} from 'react-router-dom'
-
 const cx = classNames.bind(styles)
 
 function Cart(){
@@ -139,36 +137,38 @@ function Cart(){
             totalPrice,
         };
 
-        console.log('Final order data:', finalData);
+        if(finalData.payment === 'payLater'){
+            try {
+                const res = await fetch('http://localhost:8000/order/addOrder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(finalData)
+                });
 
-        try {
-            const res = await fetch('http://localhost:8000/order/addOrder', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(finalData)
-            });
+
+                const data = await res.json();
+
+                if(data.err){
+                    alert(data.message)
+                }else{
+                    setProducts(data.products)
+                    setCustomer({
+                        fullName: '',
+                        phoneNumber: '',
+                        email: '',
+                        address: '',
+                        payment: checkRadio,
+                        orders: {}
+                    })
+                    alert('Đặt Hàng thành công');
+                }
 
 
-            const data = await res.json();
-
-            if(data.err){
-                alert(data.message)
-            }else{
-                setProducts(data.products)
-                setCustomer({
-                    fullName: '',
-                    phoneNumber: '',
-                    email: '',
-                    address: '',
-                    payment: checkRadio,
-                    orders: {}
-                })
-                alert('Đặt Hàng thành công');
+            } catch (err) {
+                console.error('Fetch error:', err);
             }
-
-
-        } catch (err) {
-            console.error('Fetch error:', err);
+        }else{
+            navigate('/BankPayment', {state: {finalData}})
         }
     };
 
@@ -183,7 +183,7 @@ function Cart(){
                     <h1>Giỏ Hàng</h1>
                     <hr />
                     <div className={cx('div-btn')}>
-                        <button className={cx('back-btn')} onClick={() => navigate(-1)}>
+                        <button className={cx('back-btn')} onClick={() => navigate('/')}>
                         ⬅ Trở về
                         </button>
                     </div>

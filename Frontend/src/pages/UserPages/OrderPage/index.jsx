@@ -28,7 +28,6 @@ function OrderPage() {
       if(data.err){
         console.log(`Message: ${data.message}`)
       }else{
-        console.log(data.orders)
         setOrders(data.orders)
       }
 

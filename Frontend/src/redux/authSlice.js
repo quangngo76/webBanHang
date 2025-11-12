@@ -4,7 +4,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const savedUser = (() => {
   try {
     const data = localStorage.getItem("user");
-    // Nếu data là null thì trả về null, nếu là JSON hợp lệ thì parse
     return data ? JSON.parse(data) : null;
   } catch (e) {
     console.error("Lỗi khi parse user từ localStorage:", e);

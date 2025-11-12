@@ -17,6 +17,7 @@ import StoreSystem from '../pages/UserPages/StoreSystem'
 import Dashboard from '../pages/AdminPages/Dashboard'
 import UserManagement from '../pages/AdminPages/UserManagement'
 import OrderManagement from '../pages/AdminPages/OrderManagement'
+import BankPayment from '../components/BankPayment'
 
 
 export const routes = [
@@ -33,4 +34,5 @@ export const routes = [
   { path: '/Dashboard', element: <Dashboard />, layout: AdminLayout },
   { path: '/UserManagement', element: <UserManagement />, layout: AdminLayout },
   { path: '/OrderManagement', element: <OrderManagement />, layout: AdminLayout },
+  { path: '/BankPayment', element: <BankPayment />},
 ]

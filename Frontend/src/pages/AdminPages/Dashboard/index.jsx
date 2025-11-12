@@ -54,7 +54,6 @@ setOrderStatusData(newStatusData);
 
     setNumberOfUsers(data.users)
     setNumberOfProducts(data.products)
-    console.log(data.orders)
     setNumberOfOrders(data.orders.length)
     setTotalRevenue(total)
     setRevenueData(data.revenueData)
