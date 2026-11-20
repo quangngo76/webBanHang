@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
-import styles from './AdminHeader.module.scss';
+import styles from './Header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faRightToBracket} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/authSlice';
+import { logout } from '../../../redux/authSlice';
 
 const cx = classNames.bind(styles);
 

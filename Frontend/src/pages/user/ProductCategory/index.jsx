@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLong, faLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Card from '../../../components/user/card';
 
 const cx = classNames.bind(styles);
 
 function ProductCategory() {
-  const formatPrice = (price) => {
-    return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  }
   
   const { user, isLogin } = useSelector((state) => state.auth);
   const [searchValue, setSearchValue] = useState('all');
@@ -79,6 +77,7 @@ function ProductCategory() {
       <h1>Danh Mục Sản Phẩm</h1>
       <hr />
       
+      //lựa chọn
       <div className={cx('choose')}>
         <select 
           value={searchValue} 
@@ -90,29 +89,18 @@ function ProductCategory() {
         </select>
       </div>
 
+      //danh sách sản phẩm
       <div className={cx('list-products')}>
         {products.map((product) => (
-          <div key={product._id} className={cx('card')}>
-            <div className={cx('image')}>
-              <img src={`http://localhost:8000/uploads/${product.imageUrl}`} />
-            </div>
-            <div className={cx('infor-card')}>
-              <h3>{product.name}</h3>
-              <span>Giá: {formatPrice(product.price)}</span>
-            </div>
-            <div className={cx('btn-card')}>
-              <button className={cx('infor-product')}>Infor</button>
-              <button 
-                className={cx('add-cart')}
-                onClick={()=> handleOnClickAddCart(product._id)}
-              >
-                Add cart
-              </button>
-            </div>
-          </div>
+          <Card
+            key={product._id}
+            product={product}
+            onAddCart={handleOnClickAddCart}
+          />
         ))}
       </div>
 
+      //Phân trang
       <div className={cx('page-list-products')}>
         <button 
           onClick={handlePrevPage}
@@ -129,6 +117,7 @@ function ProductCategory() {
         </button>
       </div>
     </div>
+
   );
 }
 

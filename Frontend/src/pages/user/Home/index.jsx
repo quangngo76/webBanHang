@@ -1,16 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './home.module.scss';
-import AsideRight from '../../../components/AsideRight/index';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import Card from '../../../components/user/card';
 
 const cx = classNames.bind(styles);
 
 function Home() {
     const { isLogin, user } = useSelector(state => state.auth);
-    const formatPrice = (price) => {
-        return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-    }
     
     const images = ["image1", "image2", "image3", "image4"];
     const [index, setIndex] = useState(0);
@@ -60,6 +58,19 @@ function Home() {
                     </div>
                 </div>
 
+                {/* Danh sách sản phẩm */}
+                <div className={cx('products')} >
+                    <h2>Sản phẩm mới</h2>
+                    <div className={cx('list-products')}>
+                        {products.map(product => (
+                            <Card
+                                key={product._id}
+                                product={product}
+                            />
+                        ))}
+                    </div>
+                </div>
+
                 {/* 3 Icon Cards */}
                 <div className={cx('features')}>
                     <h2>Chúng tôi mang đến cho bạn</h2>
@@ -82,27 +93,7 @@ function Home() {
                     </div>
                 </div>
 
-                {/* Danh sách sản phẩm */}
-                <div className={cx('products')}>
-                    <h2>Sản phẩm mới</h2>
-                    <div className={cx('list-products')}>
-                        {products.map(product => (
-                            <div key={product._id} className={cx('card')}>
-                                <div className={cx('image')}>
-                                    <img src={`http://localhost:8000/uploads/${product.imageUrl}?t=${Date.now()}`} alt={product.name} />
-                                </div>
-                                <div className={cx('infor-card')}>
-                                    <h3>{product.name}</h3>
-                                    <span>Giá: {formatPrice(product.price)}</span>
-                                </div>
-                                
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
-
-            <AsideRight />
         </div>
     );
 }
