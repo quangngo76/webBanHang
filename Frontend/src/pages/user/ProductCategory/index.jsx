@@ -77,7 +77,6 @@ function ProductCategory() {
       <h1>Danh Mục Sản Phẩm</h1>
       <hr />
       
-      //lựa chọn
       <div className={cx('choose')}>
         <select 
           value={searchValue} 
@@ -89,7 +88,6 @@ function ProductCategory() {
         </select>
       </div>
 
-      //danh sách sản phẩm
       <div className={cx('list-products')}>
         {products.map((product) => (
           <Card
